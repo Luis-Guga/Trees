@@ -44,3 +44,6 @@ buildNumber.properties
 
 # Intelij
 .idea
+
+# Vscode
+.vscode
