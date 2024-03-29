@@ -1,0 +1,9 @@
+"
+<type>: <description>
+
+[optional body]
+"
+
+Allowed types are:
+fix, feat, docs, style, refactor, test
+
