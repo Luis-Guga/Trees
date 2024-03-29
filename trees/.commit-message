@@ -5,5 +5,5 @@
 "
 
 Allowed types are:
-fix, feat, docs, style, refactor, test
+fix, feat, chore, docs, style, refactor, test
 
