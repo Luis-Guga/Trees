@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.github.balanced_binary_tree.BalancedBinarySearchTree;
 
-public class TestAddBalancedBinarySearchTree {
+public class TestAdd {
 
     @Test
     @DisplayName("add non-existing elements on the left")
@@ -82,7 +82,7 @@ public class TestAddBalancedBinarySearchTree {
             avl.add(i);
         }
         for (int i = -7; i < 7; i++) {
-            assertFalse(avl.add(i));
+            assertTrue(avl.add(i));
         }
     }
 
