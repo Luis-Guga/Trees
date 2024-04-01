@@ -1,12 +1,10 @@
-package balanced_binary_tree;
+package com.github.balanced_binary_tree;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import com.github.balanced_binary_tree.BalancedBinarySearchTree;
 
 public class TestAdd {
 
@@ -82,7 +80,7 @@ public class TestAdd {
             avl.add(i);
         }
         for (int i = -7; i < 7; i++) {
-            assertTrue(avl.add(i));
+            assertFalse(avl.add(i));
         }
     }
 

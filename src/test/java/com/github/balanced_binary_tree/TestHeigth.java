@@ -1,11 +1,9 @@
-package balanced_binary_tree;
+package com.github.balanced_binary_tree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-
-import com.github.balanced_binary_tree.BalancedBinarySearchTree;
 
 public class TestHeigth {
     @Test
