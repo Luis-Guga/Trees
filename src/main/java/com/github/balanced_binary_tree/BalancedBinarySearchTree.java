@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 
 import com.github.BinaryTree;
@@ -27,20 +28,20 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
         this.comparator = comparator;
     }
 
-    public BalancedBinarySearchTree(SortedSet<E> elements) {
+    public BalancedBinarySearchTree(Set<E> elements) {
         this.comparator = null;
         addAll(elements);
     }
 
-    public int heigth() {
-        return heigth(root);
+    public int height() {
+        return height(root);
     }
 
-    private int heigth(Node<E> tree) {
+    private int height(Node<E> tree) {
         if (isEmptyTree(tree)) {
             return -1;
         }
-        return 1 + Math.max(heigth(tree.leftChild()), heigth(tree.rightChild()));
+        return 1 + Math.max(height(tree.leftChild()), height(tree.rightChild()));
     }
 
     private int size(Node<E> tree) {
@@ -51,8 +52,12 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
         return 1 + size(tree.leftChild()) + size(tree.rightChild());
     }
 
-    public boolean addAll(SortedSet<E> elements) {
-        throw new UnsupportedOperationException();
+    public boolean addAll(Set<E> elements) {
+        int prevSize = this.size();
+        for (E element : elements) {
+            this.add(element);
+        }
+        return prevSize != this.size();
     }
 
     @SuppressWarnings("unchecked")
@@ -70,7 +75,9 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
 
     @Override
     public boolean remove(E element) {
-        return remove(element, root) != null;
+        int prevSize = this.size();
+        this.root = remove(element, root);
+        return this.size() != prevSize;
     }
 
     private Node<E> remove(E element, Node<E> tree) {
@@ -84,15 +91,16 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
             newTree = new Node<E>(tree.value(), tree.leftChild(), remove(element, tree.rightChild()));
         } else {
             if (isEmptyTree(tree.leftChild()) || isEmptyTree(tree.rightChild())) {
-                if (isEmptyTree(tree.leftChild())) {
+                if (isEmptyTree(tree.leftChild()) && !isEmptyTree(tree.rightChild())) {
                     newTree = new Node<E>(tree.rightChild().value(), tree.rightChild().leftChild(),
                             tree.rightChild().rightChild());
-                } else {
+                } else if (!isEmptyTree(tree.leftChild()) && isEmptyTree(tree.rightChild())) {
                     newTree = new Node<E>(tree.leftChild().value(), tree.leftChild().leftChild(),
                             tree.leftChild().rightChild());
                 }
             } else {
-                Node<E> successor = findClosestBiggerNumber(tree.value(), tree);
+                Node<E> successor = tree.rightChild() == null ? tree
+                        : findLeftMostChild(tree.rightChild());
                 newTree = new Node<E>(successor.value(), tree.leftChild(),
                         remove(successor.value(), tree.rightChild()));
             }
@@ -102,27 +110,34 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
             return null;
         }
         if (isPendingToTheLeft(newTree)) {
-            if (shouldRotateLeftRight(newTree, element)) {
-                newTree = rotateLeftRight(newTree);
-            } else {
+            if (balance(newTree.leftChild()) >= 0) {
                 newTree = rotateRight(newTree);
+            } else {
+                newTree = rotateLeftRight(newTree);
             }
         } else if (isPendingToTheRight(newTree)) {
-            if (shouldRotateRightLeft(newTree, element)) {
-                newTree = rotateRightLeft(newTree);
-            } else {
+            if (balance(newTree.rightChild()) <= 0) {
                 newTree = rotateLeft(newTree);
+            } else {
+                newTree = rotateRightLeft(newTree);
             }
         }
 
         return newTree;
     }
 
-    private Node<E> findClosestBiggerNumber(E value, Node<E> tree) {
+    private Node<E> findLeftMostChild(Node<E> tree) {
+        if (isEmptyTree(tree.leftChild())) {
+            return tree;
+        }
+        return findLeftMostChild(tree.leftChild());
+    }
+
+    private Node<E> findRightMostChild(Node<E> tree) {
         if (isEmptyTree(tree.rightChild())) {
             return tree;
         }
-        return findClosestBiggerNumber(value, tree.rightChild().leftChild());
+        return findRightMostChild(tree.rightChild());
     }
 
     private boolean isEmptyTree(Node<E> tree) {
@@ -161,10 +176,6 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
         }
 
         return newTree;
-    }
-
-    private boolean isLeaf(Node<E> tree) {
-        return isEmptyTree(tree.rightChild()) && isEmptyTree(tree.leftChild());
     }
 
     private boolean goesAfter(E a, E b) {
@@ -238,6 +249,10 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
 
     }
 
+    public boolean contains(E element) {
+        return contains(element, root);
+    }
+
     public Collection<E> values() {
         return inorderTraversal(root);
     }
@@ -254,15 +269,15 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
     }
 
     private int balance(Node<E> tree) {
-        return heigth(tree.leftChild()) - heigth(tree.rightChild());
+        return height(tree.leftChild()) - height(tree.rightChild());
     }
 
     private boolean shouldRotateLeftRight(Node<E> tree, E valueInserted) {
-        return goesBefore(tree.leftChild().value(), valueInserted) || balance(tree.leftChild()) < 0;
+        return goesBefore(tree.leftChild().value(), valueInserted);
     }
 
     private boolean shouldRotateRightLeft(Node<E> tree, E valueInserted) {
-        return goesAfter(tree.rightChild().value(), valueInserted) || balance(tree.rightChild()) > 0;
+        return goesAfter(tree.rightChild().value(), valueInserted);
     }
 
     public Iterator<E> iterator() {
@@ -275,13 +290,11 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
     }
 
     public Comparator<? super E> comparator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'comparator'");
+        return this.comparator;
     }
 
     public E first() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'first'");
+        return findLeftMostChild(root).value();
     }
 
     public SortedSet<E> headSet(E arg0) {
@@ -290,8 +303,7 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
     }
 
     public E last() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'last'");
+        return findRightMostChild(root).value();
     }
 
     public SortedSet<E> subSet(E arg0, E arg1) {
@@ -302,10 +314,6 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
     public SortedSet<E> tailSet(E arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tailSet'");
-    }
-
-    public boolean contains(E element) {
-        return contains(element, root);
     }
 
     private boolean contains(E element, Node<E> tree) {
