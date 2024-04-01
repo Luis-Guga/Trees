@@ -1,4 +1,4 @@
-package com.github.balanced_binary_tree;
+package com.github.avl_tree;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +13,7 @@ public class TestAdd {
 
     @Test
     public void testAddItemsShouldIncreaseSize() {
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<>();
+        AvlTree<Integer> avl = new AvlTree<>();
         int size = 0;
         for (int i = 7; i > -7; i--) {
             avl.add(i);
@@ -24,7 +24,7 @@ public class TestAdd {
 
     @Test
     public void testAddNonExistingItemsOnTheRightShouldReturnTrue() {
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<>();
+        AvlTree<Integer> avl = new AvlTree<>();
         for (int i = -7; i < 7; i++) {
             assertTrue(avl.add(i));
         }
@@ -32,7 +32,7 @@ public class TestAdd {
 
     @Test
     public void testAddNonExistingItemsBalancedShouldReturnTrue() {
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<>();
+        AvlTree<Integer> avl = new AvlTree<>();
         assertTrue(avl.add(5));
         assertTrue(avl.add(2));
         assertTrue(avl.add(1));
@@ -61,7 +61,7 @@ public class TestAdd {
         list.add(9);
         list.add(10);
 
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<Integer>(list);
+        AvlTree<Integer> avl = new AvlTree<Integer>(list);
         int size = list.size();
         for (Integer element : list) {
             assertFalse(avl.add(element));
@@ -72,7 +72,7 @@ public class TestAdd {
 
     @Test
     public void testAddExistingItemsOnTheRightShouldReturnFalse() {
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<>();
+        AvlTree<Integer> avl = new AvlTree<>();
         for (int i = -7; i < 7; i++) {
             avl.add(i);
         }
@@ -83,7 +83,7 @@ public class TestAdd {
 
     @Test
     public void testAddExistingItemsShouldReturnFalse() {
-        BalancedBinarySearchTree<Integer> avl = new BalancedBinarySearchTree<>();
+        AvlTree<Integer> avl = new AvlTree<>();
         for (int i = 7; i > -7; i--) {
             avl.add(i);
         }

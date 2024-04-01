@@ -1,4 +1,4 @@
-package com.github.balanced_binary_tree;
+package com.github.avl_tree;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.github.balanced_binary_tree;
+package com.github.avl_tree;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.SortedSet;
 
 import com.github.BinaryTree;
 
-public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
+public class AvlTree<E> implements BinaryTree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
 
@@ -20,15 +20,15 @@ public class BalancedBinarySearchTree<E> implements BinaryTree<E> {
 
     private Node<E> root;
 
-    public BalancedBinarySearchTree() {
+    public AvlTree() {
         this.comparator = null;
     }
 
-    public BalancedBinarySearchTree(Comparator<E> comparator) {
+    public AvlTree(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
-    public BalancedBinarySearchTree(Set<E> elements) {
+    public AvlTree(Set<E> elements) {
         this.comparator = null;
         addAll(elements);
     }
