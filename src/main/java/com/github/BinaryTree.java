@@ -1,5 +1,7 @@
 package com.github;
 
+import java.util.Collection;
+
 public interface BinaryTree<E> extends Cloneable {
 
     boolean add(E element);
@@ -8,7 +10,9 @@ public interface BinaryTree<E> extends Cloneable {
 
     boolean contains(E element);
 
-    int heigth();
+    int height();
 
     int size();
+
+    Collection<E> values();
 }
