@@ -9,7 +9,13 @@ import java.util.Set;
 
 import com.github.Tree;
 
-
+/**
+ * An implementation of a self-balancing AVL tree.
+ *
+ * @param <E> the type of elements stored in the tree
+ * @version 1.0
+ * @author Luis Hartmann
+ */
 public class AvlTree<E extends Comparable<E>> implements Tree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
@@ -45,11 +51,6 @@ public class AvlTree<E extends Comparable<E>> implements Tree<E> {
         addAll(elements);
     }
 
-    /**
-     * Returns the height of the AVL tree.
-     * 
-     * @return the height of the AVL tree
-     */
     public int height() {
         return height(root);
     }
@@ -77,7 +78,7 @@ public class AvlTree<E extends Comparable<E>> implements Tree<E> {
         return prevSize != this.size();
     }
 
-    public int compare(E first, E second) {
+    private int compare(E first, E second) {
         return this.comparator == null ? ((Comparable<E>) first).compareTo(second)
                 : this.comparator.compare(first, second);
     }
@@ -151,13 +152,6 @@ public class AvlTree<E extends Comparable<E>> implements Tree<E> {
             return tree;
         }
         return findLeftMostChild(tree.leftChild());
-    }
-
-    private Node<E> findRightMostChild(Node<E> tree) {
-        if (isEmptyTree(tree.rightChild())) {
-            return tree;
-        }
-        return findRightMostChild(tree.rightChild());
     }
 
     private boolean isEmptyTree(Node<E> tree) {
