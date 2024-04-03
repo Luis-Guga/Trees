@@ -10,7 +10,7 @@ import java.util.Set;
 import com.github.Tree;
 
 
-public class AvlTree<E extends Comparable> implements Tree<E> {
+public class AvlTree<E extends Comparable<E>> implements Tree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
 
@@ -19,19 +19,37 @@ public class AvlTree<E extends Comparable> implements Tree<E> {
 
     private Node<E> root;
 
+    /**
+     * Constructs an empty AVL tree.
+     */
     public AvlTree() {
         this.comparator = null;
     }
 
+    /**
+     * Constructs an AVL tree with the specified comparator.
+     *
+     * @param comparator the comparator to be used for ordering elements in the tree
+     */
     public AvlTree(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
+    /**
+     * Constructs an AVL tree containing the elements of the specified set.
+     * 
+     * @param elements the set of elements to be added to the tree
+     */
     public AvlTree(Set<E> elements) {
         this.comparator = null;
         addAll(elements);
     }
 
+    /**
+     * Returns the height of the AVL tree.
+     * 
+     * @return the height of the AVL tree
+     */
     public int height() {
         return height(root);
     }
@@ -68,9 +86,14 @@ public class AvlTree<E extends Comparable> implements Tree<E> {
         int previousSize = this.size(root);
         this.root = add(element, root);
         return this.size(root) != previousSize;
-
     }
 
+    /**
+     * Removes the specified element from the AVL tree.
+     * 
+     * @param element the element to be removed from the tree
+     * @return true if the element was successfully removed, false otherwise
+     */
     public boolean remove(E element) {
         int prevSize = this.size();
         this.root = remove(element, root);
