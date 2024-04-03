@@ -9,7 +9,8 @@ import java.util.Set;
 
 import com.github.Tree;
 
-public class AvlTree<E> implements Tree<E> {
+
+public class AvlTree<E extends Comparable> implements Tree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
 
@@ -58,7 +59,6 @@ public class AvlTree<E> implements Tree<E> {
         return prevSize != this.size();
     }
 
-    @SuppressWarnings("unchecked")
     public int compare(E first, E second) {
         return this.comparator == null ? ((Comparable<E>) first).compareTo(second)
                 : this.comparator.compare(first, second);
@@ -279,10 +279,6 @@ public class AvlTree<E> implements Tree<E> {
 
     public int size() {
         return size(root);
-    }
-
-    public Comparator<? super E> comparator() {
-        return this.comparator;
     }
 
     private boolean contains(E element, Node<E> tree) {
