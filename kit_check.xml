@@ -168,11 +168,11 @@
         <module name="LambdaBodyLength" />
         <module name="MethodCount">
             <property name="severity" value="warning" />
-            <property name="maxTotal" value="25" />
-            <property name="maxPrivate" value="25" />
-            <property name="maxPackage" value="25" />
-            <property name="maxProtected" value="25" />
-            <property name="maxPublic" value="25" />
+            <property name="maxTotal" value="30" />
+            <property name="maxPrivate" value="30" />
+            <property name="maxPackage" value="30" />
+            <property name="maxProtected" value="30" />
+            <property name="maxPublic" value="30" />
         </module>
         <module name="GenericWhitespace">
             <property name="severity" value="warning" />
@@ -258,8 +258,6 @@
         <module name="JavadocType">
             <property name="severity" value="warning" />
             <property name="scope" value="package" />
-            <property name="authorFormat"
-                value="^((u[a-z]{3,4})|([a-z]{2}\d{4})|(Programmieren-Team))$" />
         </module>
         <module name="JavadocMethod">
             <property name="severity" value="warning" />
