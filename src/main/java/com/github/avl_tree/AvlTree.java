@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
 import com.github.Tree;
 
@@ -52,7 +50,7 @@ public class AvlTree<E> implements Tree<E> {
         return 1 + size(tree.leftChild()) + size(tree.rightChild());
     }
 
-    public boolean addAll(Set<E> elements) {
+    private boolean addAll(Set<E> elements) {
         int prevSize = this.size();
         for (E element : elements) {
             this.add(element);
@@ -73,7 +71,6 @@ public class AvlTree<E> implements Tree<E> {
 
     }
 
-    @Override
     public boolean remove(E element) {
         int prevSize = this.size();
         this.root = remove(element, root);
@@ -280,40 +277,12 @@ public class AvlTree<E> implements Tree<E> {
         return goesAfter(tree.rightChild().value(), valueInserted);
     }
 
-    public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
-    }
-
     public int size() {
         return size(root);
     }
 
     public Comparator<? super E> comparator() {
         return this.comparator;
-    }
-
-    public E first() {
-        return findLeftMostChild(root).value();
-    }
-
-    public SortedSet<E> headSet(E arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'headSet'");
-    }
-
-    public E last() {
-        return findRightMostChild(root).value();
-    }
-
-    public SortedSet<E> subSet(E arg0, E arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'subSet'");
-    }
-
-    public SortedSet<E> tailSet(E arg0) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tailSet'");
     }
 
     private boolean contains(E element, Node<E> tree) {
