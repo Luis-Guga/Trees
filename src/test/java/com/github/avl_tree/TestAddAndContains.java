@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-public class TestAdd {
+public class TestAddAndContains {
 
     @Test
     public void testAddItemsShouldIncreaseSize() {
@@ -34,16 +34,27 @@ public class TestAdd {
     public void testAddNonExistingItemsBalancedShouldReturnTrue() {
         AvlTree<Integer> avl = new AvlTree<>();
         assertTrue(avl.add(5));
+        assertTrue(avl.contains(5));
         assertTrue(avl.add(2));
+        assertTrue(avl.contains(2));
         assertTrue(avl.add(1));
+        assertTrue(avl.contains(1));
         assertTrue(avl.add(0));
+        assertTrue(avl.contains(0));
         assertTrue(avl.add(3));
+        assertTrue(avl.contains(3));
         assertTrue(avl.add(4));
+        assertTrue(avl.contains(4));
         assertTrue(avl.add(8));
+        assertTrue(avl.contains(8));
         assertTrue(avl.add(7));
+        assertTrue(avl.contains(7));
         assertTrue(avl.add(6));
+        assertTrue(avl.contains(6));
         assertTrue(avl.add(9));
+        assertTrue(avl.contains(9));
         assertTrue(avl.add(10));
+        assertTrue(avl.contains(10));
     }
 
     @Test
