@@ -15,7 +15,7 @@ public class TestSortingAndBalancing {
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 3, 4 })
     void shouldStaySortedInRandomCasesWithStringAndOtherComparator(int seed) {
-        AvlTree<String> avl = new AvlTree<>(Collections.reverseOrder());
+        AvlTree<String> avl = new AvlTree<String>(Collections.reverseOrder());
         List<String> list = new ArrayList<>();
         Random random = new Random(seed);
 
