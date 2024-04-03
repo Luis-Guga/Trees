@@ -258,8 +258,6 @@
         <module name="JavadocType">
             <property name="severity" value="warning" />
             <property name="scope" value="package" />
-            <property name="authorFormat"
-                value="^((u[a-z]{3,4})|([a-z]{2}\d{4})|(Programmieren-Team))$" />
         </module>
         <module name="JavadocMethod">
             <property name="severity" value="warning" />
