@@ -2,7 +2,7 @@ package com.github;
 
 import java.util.Collection;
 
-public interface BinaryTree<E> extends Cloneable {
+public interface Tree<E> extends Cloneable {
 
     boolean add(E element);
 

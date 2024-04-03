@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
-import com.github.BinaryTree;
+import com.github.Tree;
 
-public class AvlTree<E> implements BinaryTree<E> {
+public class AvlTree<E> implements Tree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
 
