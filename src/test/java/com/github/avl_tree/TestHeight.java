@@ -40,7 +40,7 @@ public class TestHeight {
             int numberToAdd = list.get(Math.abs(random.nextInt() % list.size()));
             avl.add(numberToAdd);
         }
-        // This is the inequality of the height for a AVL tree
+        // This is the inequality of the height for an AVL tree
         assertTrue((Math.log(avl.size() + 1) / Math.log(2) - 1) <= avl.height()
                 && avl.height() < Math.log(avl.size() + 2) / Math.log(1.618) - 0.328);
     }
@@ -52,7 +52,7 @@ public class TestHeight {
         for (int i = 0; i < 1000; i++) {
             avl.add(i);
         }
-        // This is the inequality of the height for a AVL tree
+        // This is the inequality of the height for an AVL tree
         assertTrue(Math.floor(Math.log(avl.size() + 1) / Math.log(2)) <= avl.height());
         assertTrue(avl.height() <= Math.log(avl.size() + 2) / Math.log(1.618) - 0.328);
     }
