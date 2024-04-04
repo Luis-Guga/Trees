@@ -16,7 +16,7 @@ import com.github.Tree;
  * @version 1.0
  * @author Luis Hartmann
  */
-public class AvlTree<E extends Comparable<E>> implements Tree<E> {
+public class AvlTree<E> implements Tree<E> {
     private record Node<T>(T value, Node<T> leftChild, Node<T> rightChild) {
     }
 
@@ -89,12 +89,6 @@ public class AvlTree<E extends Comparable<E>> implements Tree<E> {
         return this.size(root) != previousSize;
     }
 
-    /**
-     * Removes the specified element from the AVL tree.
-     * 
-     * @param element the element to be removed from the tree
-     * @return true if the element was successfully removed, false otherwise
-     */
     public boolean remove(E element) {
         int prevSize = this.size();
         this.root = remove(element, root);
