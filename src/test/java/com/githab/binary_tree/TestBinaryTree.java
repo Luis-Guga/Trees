@@ -92,6 +92,44 @@ public class TestBinaryTree {
         binaryTree.remove(16);
         binaryTree.remove(15);
         binaryTree.remove(14);
-        assertEquals(5, binaryTree.depth());
+        assertEquals(5, binaryTree.height());
     }
+    /*@Test
+    public void valuesTest() {
+        BinaryTree<Integer> binaryTree = new BinaryTree<>();
+        List<Integer> elements = new ArrayList<>();
+        binaryTree.add(9);
+        elements.add(9);
+        binaryTree.add(20);
+        elements.add(20);
+        binaryTree.add(21);
+        elements.add(21);
+        binaryTree.add(16);
+        elements.add(16);
+        binaryTree.add(13);
+        elements.add(13);
+        binaryTree.add(11);
+        elements.add(11);
+        binaryTree.add(10);
+        elements.add(10);
+        binaryTree.add(12);
+        elements.add(12);
+        binaryTree.add(14);
+        elements.add(14);
+        binaryTree.add(15);
+        elements.add(15);
+        binaryTree.add(18);
+        elements.add(18);
+        binaryTree.add(17);
+        elements.add(17);
+        binaryTree.add(19);
+        elements.add(19);
+        binaryTree.remove(16);
+        elements.remove(16);
+        binaryTree.remove(15);
+        elements.remove(15);
+        binaryTree.remove(14);
+        elements.remove(14);
+        assertTrue(elements.equals(binaryTree.values()));
+    }*/
 }
