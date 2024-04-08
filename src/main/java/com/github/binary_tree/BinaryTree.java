@@ -1,10 +1,12 @@
 package com.github.binary_tree;
 
+import com.github.Tree;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class BinaryTree <T> {
+public class BinaryTree <T> implements Tree<T> {
     private final Comparator<T> comparator;
     private int treeSize;
     private Node<T> root;
